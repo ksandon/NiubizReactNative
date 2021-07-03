@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "rn-niubiz",
+    "slug": "rn-niubiz",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "rn-niubiz"
+}
