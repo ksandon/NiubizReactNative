@@ -207,6 +207,20 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '7.0.1'
+    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.61'
+    implementation 'com.squareup.retrofit2:retrofit:2.8.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+    implementation project(':TMXProfiling-6.0-138')
+    implementation project(':TMXProfilingConnections-6.0-138')
+    implementation project(':cardinalmobilesdk-2.2.1-2')
+    implementation project(':visanet-lib-lite-release-2.1.5')
+
 }
 
 // Run this once to be able to run the application with BUCK
