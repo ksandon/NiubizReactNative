@@ -39,6 +39,8 @@ public class NiubizModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void openNiubizForm(ReadableMap map, Promise promise) {
 
+        Log.i(TAG, "Android niubiz form");
+
         Map<String, Object> data = new HashMap<>();
         data.put(VisaNet.VISANET_CHANNEL, Channel.MOBILE);
         data.put(VisaNet.VISANET_COUNTABLE, true);
@@ -52,11 +54,12 @@ public class NiubizModule extends ReactContextBaseJavaModule {
 
         data.put(VisaNet.VISANET_ENDPOINT_URL, map.getString("endpoint"));
         data.put(VisaNet.VISANET_CERTIFICATE_HOST, map.getString("endpoint"));
-        data.put(VisaNet.VISANET_CERTIFICATE_PIN, map.getString("pin"));
+        data.put(VisaNet.VISANET_CERTIFICATE_PIN, "sha256/" + map.getString("pin"));
 
         VisaNetViewAuthorizationCustom custom = new VisaNetViewAuthorizationCustom();
         resultPromise = promise;
 
+        Log.i(TAG, "Android open niubiz form");
         try {
             VisaNet.authorization(getCurrentActivity(), data, custom);
         }
@@ -71,9 +74,11 @@ public class NiubizModule extends ReactContextBaseJavaModule {
             if (requestCode == VisaNet.VISANET_AUTHORIZATION) {
                 if (data != null) {
                     if (resultCode == Activity.RESULT_OK) {
+                        Log.i(TAG, "Android result OK");
                         String response = data.getExtras().getString("keySuccess");
                         resultPromise.resolve(response);
                     } else {
+                        Log.i(TAG, "Android result ERROR");
                         String response = data.getExtras().getString("keyError");
                         resultPromise.resolve(response);
                     }

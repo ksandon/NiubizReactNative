@@ -15,30 +15,34 @@ export default function App() {
         },
         redirect: 'follow'
       };
-      let response = await fetch("https://apitestenv.vnforapps.com/api.security/v1/security", requestOptions);
-      let token = await response.text();
-      return token;
+      fetch("https://apitestenv.vnforapps.com/api.security/v1/security", requestOptions)
+    .then(response => response.text())
+    .then(result => pay(result))
     } catch (error) {
+      console.log("Error Niubiz token");
       console.error(error);
     }
   }
 
-  const pay = async () => {
-    const token = getNiubizToken();
+  const pay = async (token) => {
+    console.log(`Niubiz token: ${token}`);
     const data = {
       'name': 'Kevin',
       'lastname': 'Sandon',
       'email': 'sandon13496@gmail.com',
+      'amount': '20.50',
       'token': token,
       'merchant': '522591303',
       'purchase': '202107052033',
       'endpoint': 'https://apitestenv.vnforapps.com/',
       'pin': 'w+9oxEkAQVM2aZGzmUYiTP2L2VA0JnxqIvH2e/HPhV0='
     };
+    console.log("Open Niubiz form");
     try {
       const response = await NiubizModule.openNiubizForm(data);
-      console.log(response);
+      console.log(`Niubiz response: ${response}`);
     } catch (e) {
+      console.log("Error open Niubiz form");
       console.error(e);
     }
   };
@@ -48,7 +52,7 @@ export default function App() {
       <Button
         title = "Pagar"
         color="#841584"
-        onPress={pay}
+        onPress={getNiubizToken}
       />
       <StatusBar style="auto" />
     </View>
